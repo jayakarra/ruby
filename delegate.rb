@@ -4,6 +4,11 @@ class Parser
    def  phone_number
      p "formats phone number"
    end
+
+    def self.singletn_method
+      p "singletn_method"
+    end
+
 end
 
 class User
@@ -44,3 +49,20 @@ end
 u = Userf.new(Parser.new)
 u.phone_number
 u.format_phone_number
+
+
+class Userf
+  extend Forwardable
+
+  def_delegators :Parser, :singletn_method
+
+  def initialize parser
+    @parser = parser
+  end
+
+end
+Userf.singletn_method ### => Gives ERROR
+
+## to delegate to Class method use SingleForwardable  or use it on instance in 2.1.0
+
+
